@@ -335,12 +335,12 @@ Widget spawnMenu() {
             side: BorderSide(color: Colors.blue[800], width: 3.0),
           ),
           title: Text(
-            "Anuranan Official App  \nVersion 0.0.4-alpha1",
+            "Anuranan Official App  \nVersion 0.0.5-alpha1",
             style: TextStyle(
                 fontFamily: "Jetbrains Mono", fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
-            "Built with ❤ \nBy Swastik Nath at Navi Mumbai, India. \n\nLast Updated on 06.02.2021",
+            "Built with ❤ \nBy Swastik Nath at Navi Mumbai, India. \n\nLast Updated on 07.02.2021",
             style: TextStyle(fontFamily: "Jetbrains Mono"),
           ),
         )
