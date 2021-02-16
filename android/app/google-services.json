@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "530108979205",
+    "project_id": "anuranan-sahitya-gosthi",
+    "storage_bucket": "anuranan-sahitya-gosthi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530108979205:android:7ff8fa3c8caac48274246c",
+        "android_client_info": {
+          "package_name": "com.swastiknathgroup.anuranan_sahitya_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530108979205-sia1r1136ms0862urvl0rsqdtdfuv5cv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swastiknathgroup.anuranan_sahitya_app",
+            "certificate_hash": "493cb2ca57cfc4825892c8c226bb55d4a87fc579"
+          }
+        },
+        {
+          "client_id": "530108979205-l3gt06dvs5hqspg4h1v95ghil62sf384.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADTmTzx3q-p9TRa28daXaXO9zyukoaId4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530108979205-l3gt06dvs5hqspg4h1v95ghil62sf384.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

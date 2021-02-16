@@ -30,4 +30,12 @@ class PageNav {
   static void sentToHome(context) {
     Navigator.pushNamed(context, '/home');
   }
+
+  static void sendAnyWhere(context, route) {
+    Navigator.pushNamed(context, route);
+  }
+
+  static void kill_nav(context, route) {
+    Navigator.popUntil(context, (route) => false);
+  }
 }

@@ -13,14 +13,21 @@
  */
 
 import 'dart:math';
+import 'dart:ui';
 
+import 'package:anuranan_sahitya_app/flows/github.dart';
+import 'package:anuranan_sahitya_app/flows/google_auth.dart';
 import 'package:anuranan_sahitya_app/utils/PageNav.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hb_check_code/hb_check_code.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 import 'package:sign_button/sign_button.dart';
 
@@ -33,12 +40,32 @@ String buildCaptcha() {
 }
 
 class SigninPage extends StatefulWidget {
+  FirebaseAuth auth;
+
   @override
   _SigninPageState createState() => _SigninPageState();
+
+  SigninPage({@required this.auth});
 }
 
 class _SigninPageState extends State<SigninPage> {
   String code = buildCaptcha();
+
+  void googleSignIn() async {
+    UserCredential cred = await signInWithGoogle(widget.auth);
+    User currentUs = widget.auth.currentUser;
+    if (currentUs != null) {
+      PageNav.sendAnyWhere(context, '/home');
+    }
+  }
+
+  void githubSignin() async {
+    UserCredential cred = await signInWithGithub(context, widget.auth);
+    User currentUS = widget.auth.currentUser;
+    if (currentUS != null) {
+      PageNav.sendAnyWhere(context, '/home');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +78,18 @@ class _SigninPageState extends State<SigninPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('images/signin.jpg'),
-                            fit: BoxFit.cover)),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 3,
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 3.5,
+                      width: MediaQuery.of(context).size.width,
                       child: Image.asset(
                         'images/signin.jpg',
                         fit: BoxFit.cover,
                       ),
-                    )),
+                    ),
+                  ],
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 30, left: 20),
                   child: Text(
@@ -170,7 +197,7 @@ class _SigninPageState extends State<SigninPage> {
                           splashColor: Colors.lightBlueAccent,
                           padding: EdgeInsets.all(8.0),
                           onPressed: () {
-                            PageNav.sentToHome(context);
+                            PageNav.sendAnyWhere(context, '/auth');
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -233,13 +260,29 @@ class _SigninPageState extends State<SigninPage> {
                             Expanded(
                               child: SignInButton.mini(
                                 buttonType: ButtonType.google,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Alert(
+                                    content:
+                                        SpinKitCubeGrid(color: Colors.cyan),
+                                    title: 'Sign In in Progress',
+                                    context: context,
+                                  ).show();
+                                  googleSignIn();
+                                },
                               ),
                             ),
                             Expanded(
-                              child: SignInButton.mini(
-                                buttonType: ButtonType.microsoft,
-                                onPressed: () {},
+                              child: MaterialButton(
+                                height: 45,
+                                onPressed: () {
+                                  PageNav.sendAnyWhere(context, '/phone');
+                                },
+                                elevation: 5.0,
+                                shape: CircleBorder(),
+                                splashColor: Colors.yellow,
+                                color: Colors.purple[800],
+                                child:
+                                    Icon(LineIcons.phone, color: Colors.white),
                               ),
                             ),
                             Expanded(
@@ -257,7 +300,15 @@ class _SigninPageState extends State<SigninPage> {
                             Expanded(
                               child: SignInButton.mini(
                                 buttonType: ButtonType.github,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Alert(
+                                    content:
+                                        SpinKitCubeGrid(color: Colors.cyan),
+                                    title: 'Sign In in Progress',
+                                    context: context,
+                                  ).show();
+                                  githubSignin();
+                                },
                               ),
                             ),
                           ],

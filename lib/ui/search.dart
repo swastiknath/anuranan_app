@@ -12,7 +12,10 @@
  *                            THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class SearchPage extends StatefulWidget {
@@ -27,8 +30,53 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
+    return ListView(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/error_art.json',
+              height: MediaQuery.of(context).size.height / 2.0,
+              width: MediaQuery.of(context).size.width,
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Ow! Snap",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.titilliumWeb(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  letterSpacing: 2.0),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "Would you be kind enough to check your Internet Connection? Anuranan Needs internet to Connect with its servers.",
+                  style: GoogleFonts.titilliumWeb(
+                    color: Colors.grey,
+                    letterSpacing: 2.0,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ),
+            Text(
+              "Error Code: 0X12",
+              style: TextStyle(
+                fontFamily: "Jetbrains Mono",
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            )
+          ],
+        )
+      ],
     );
   }
 }

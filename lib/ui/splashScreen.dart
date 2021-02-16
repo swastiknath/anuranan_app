@@ -16,19 +16,37 @@ import 'dart:async';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:anuranan_sahitya_app/utils/PageNav.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashScreen extends StatefulWidget {
+  FirebaseAuth firebaseAuth;
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
+
+  SplashScreen({@required this.firebaseAuth});
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  void firebaseauth() {
+    widget.firebaseAuth.authStateChanges().listen((User user) {
+      if (user == null) {
+        Timer(Duration(seconds: 5), () => PageNav.sendToRegister(context));
+      } else {
+        Timer(
+            Duration(seconds: 5), () => PageNav.sendAnyWhere(context, '/auth'));
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 11), () => PageNav.sendToRegister(context));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      return firebaseauth();
+    });
   }
 
   @override
